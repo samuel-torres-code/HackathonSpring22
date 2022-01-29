@@ -14,5 +14,8 @@
     "express": "^4.17.2",
     "lokijs": "^1.5.12",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "node-sass": "^7.0.1"
   }
 }

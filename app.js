@@ -53,8 +53,21 @@ app.post('/upvote-joke', (req, res) => {
     res.sendStatus(200)
 })
 
-// When user visits home page
+//Home Page
 app.get('/', (req, res) => {
+
+    // Render home.ejs
+    res.render('home')
+})
+
+app.get('/listings', (req, res) => {
+
+    // Render listings.ejs
+    res.render('listings')
+})
+
+// Leaderboard Page
+app.get('/leaderboard', (req, res) => {
 
     // Render leaderboard
     // Pass in data
