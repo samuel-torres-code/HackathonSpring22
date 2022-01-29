@@ -65,6 +65,11 @@ app.get('/listings', (req, res) => {
     // Render listings.ejs
     res.render('listings')
 })
+app.get('/post', (req, res) => {
+
+    // Render listings.ejs
+    res.render('post')
+})
 
 // Leaderboard Page
 app.get('/leaderboard', (req, res) => {
