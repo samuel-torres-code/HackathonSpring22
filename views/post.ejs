@@ -21,32 +21,57 @@
     </style>
     <div class="form-page-container">
         <div class="form-container">
-            <form method="POST" >
-                <input class="input" type="text" placeholder="title" name="title">
-                <textarea class="textarea" placeholder="description" name="description"></textarea>
-                <input class="input" type="email" placeholder="e-mail" name="email">
-                <input class="input" type="number" placeholder="phone number" name="phone_number">
-                <input class="input" type="text" placeholder="location" name="location">
-                <div class="file">
-                    <label class="file-label">
-                        <input class="file-input" type="file" name="photo">
-                        <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                upload a photo…
-                            </span>
-                        </span>
-                    </label>
-                </div>
-                <button class="button" type="submit">Submit</button>
+            <form >
+                <input class="input" type="text" placeholder="title" id="title">
+                <textarea class="textarea" placeholder="description" id="description"></textarea>
+                <input class="input" type="email" placeholder="e-mail" id="email">
+                <input class="input" type="number" placeholder="phone number" id="phone_number">
+                <input class="input" type="text" placeholder="location" id="location">
+                
+                
+                    
+                    
+
+                <button  id="btn">Submit</button>
 
             </form>
-
+            
+            
 
         </div>
     </div>
+
+    
+
+    <!-- Code to interact with the backend -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        let datas = [];
+        const handleSubmit = (ev) => {
+            ev.preventDefault();
+
+            let formData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                email: document.getElementById('email').value,
+                phone_number: document.getElementById('phone_number').value,
+                location: document.getElementById('location').value,
+                photo: document.getElementById('photo').value,
+
+
+            }
+            
+
+            
+
+            console.log(formData);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btn').addEventListener('click', handleSubmit);
+        });
+    </script>
 </body>
 
 </html>
