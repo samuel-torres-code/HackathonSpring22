@@ -63,6 +63,8 @@
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 10px;
+          overflow-y: scroll;
+          height: 85vh
       }
 
       @media screen and (max-width: 1080px) {
@@ -70,6 +72,8 @@
           display: grid;
           
           grid-template-columns: repeat(1, 1fr);
+          overflow-y: scroll;
+          height: 85vh
         }
       }
 
@@ -100,7 +104,7 @@
         display: flex;
         flex-flow: row wrap;
         align-items: center;
-        height: 15%;
+        height: 15vh;
         }
         #zip_code {
             vertical-align: middle;

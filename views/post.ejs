@@ -116,8 +116,9 @@
                 <label for="location">enter your location...</label>
                 <input class="input" type="text" placeholder="location" id="location" required>
 
-
-                <button id="btn" class="button" style="vertical-align:middle"><span>submit</span></button>
+                <a href='/listings'>
+                <button id="btn" type="button" class="button" style="vertical-align:middle"><span>submit</span></button>
+              </a>
 
             </form>
 
@@ -193,7 +194,7 @@
             })
             .then(function (response) {
                 
-                window.location = "/listings"
+              console.log('added to db')
             
             })
             .catch(function (error) {
