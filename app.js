@@ -137,9 +137,7 @@ app.post('/post-listing', (req, res) => {
     
 
     // Send 'ok' status back
-    res.render('listings',{
-        data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
-    })
+    res.redirect("/listings")
 })
 
 //Home Page
