@@ -4,7 +4,8 @@
     "description": "Provide beginners and those with limited website development experience the tools and knowledge to build a full-stack website (both a frontend and backend).",
     "main": "app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
     },
     "author": "",
     "license": "ISC",

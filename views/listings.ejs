@@ -143,11 +143,14 @@
       <div class = "square">
         <h1 ><%= listing.title %></h1>
         <h2><%= listing.description %></h2>
-
-
+        <img src="uploads/<%= listing.imageName %>"
+              width="600"
+              height="150"
+              style="width: 280px; height: 150px; object-fit: cover;"   
+        />
+        
         <%= listing.zip_code %>
         <%= listing.location %>
-        <img src="uploads/<%= listing.imageName %>" />
 
 
       </div>
