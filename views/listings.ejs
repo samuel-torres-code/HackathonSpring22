@@ -90,7 +90,9 @@
         <h1 ><%= listing.title %></h1>
         <h2><%= listing.description %></h2>
 
-        <%= listing.title %>
+        <%= listing.zip_code %>
+        <%= listing.location %>
+        <img src="uploads/<%= listing.imageName %>" />
 
       </div>
       <% }) %>

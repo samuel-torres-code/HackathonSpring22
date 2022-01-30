@@ -8,7 +8,8 @@ const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 const { v4: uuidv4 } = require('uuid');
-
+var fileId = 0
+var currExt = ".jpg"
 
 
 
@@ -33,6 +34,8 @@ var app = express()
 // Where to store frontend assets
 app.use(express.static('public'));
 
+app.use('/uploads', express.static('uploads'));
+
 // Logging (Optional)
 app.use(morgan('dev'));
 
@@ -48,7 +51,8 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         console.log(file);
-      cb(null, Date.now() + path.extname(file.originalname))
+        currExt = path.extname(file.originalname);
+      cb(null, fileId + currExt)
     }
   })
   
@@ -96,10 +100,11 @@ app.get('/random-listings', (req, res) => {
                     description: "dsafsdfswfsdfsdfsdfsdfdsfdsfds",
                     zip_code: 1213,
                     location: "ddsadasdasf",
-                    imageName: "",
+                    imageName: fileId,
                     dateCreated: Date.now()
                     });
     listings.update(listing);
+    
                 }
 
 
@@ -123,10 +128,11 @@ app.post('/post-listing', (req, res) => {
                     description: req.body.description,
                     zip_code: req.body.zip_code,
                     location: req.body.location,
-                    imageName: req.body.imageName,
+                    imageName: fileId + currExt,
                     dateCreated: Date.now()
                     });
     listings.update(listing);
+    fileId ++;
 
 
 
@@ -165,7 +171,7 @@ app.get('/post', (req, res) => {
 //uploadphoto handler
 app.post('/upload-photo', upload.single("image") ,(req, res) => {
     
-    res.send('Image Uploaded')
+    console.log('image')
   
 })
 
