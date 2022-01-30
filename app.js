@@ -99,7 +99,7 @@ app.get('/random-listings', (req, res) => {
                     id: uuidv4(),
                     title: "fdsfdsfsdgfsd",
                     description: "dsafsdfswfsdfsdfsdfsdfdsfdsfds",
-                    zip_code: 1213,
+                    zip_code: "1213",
                     location: "ddsadasdasf",
                     imageName: fileId,
                     dateCreated: Date.now()
@@ -128,7 +128,7 @@ app.post('/post-listing', (req, res) => {
                     id: uuidv4(),
                     title: req.body.title,
                     description: req.body.description,
-                    zip_code: req.body.zip_code,
+                    zip_code: req.body.zip_code.toString().trim(),
                     location: req.body.location,
                     imageName: fileId + currExt,
                     dateCreated: Date.now()
@@ -153,10 +153,10 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-var filterZip = 0
+var filterZip = ""
 app.get('/listings', (req, res) => {
 
-   if (filterZip == 0) {
+   if (filterZip == "") {
     res.render('listings',{
         data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
     })
@@ -164,10 +164,9 @@ app.get('/listings', (req, res) => {
    else {
        console.log("filterZip ="+filterZip)
     res.render('listings',{
-        data: listings.chain().find({}).where(function(obj) {
-            return obj.zip_code === filterZip;
-          }).simplesort('dateAdded').data().reverse()
+        data: listings.chain().find({'zip_code':filterZip.toString()}).simplesort('dateAdded').data().reverse()
     })
+    
    }
     
     // Render listings.ejs
@@ -175,13 +174,8 @@ app.get('/listings', (req, res) => {
 })
 
 app.post('/listings', (req, res) => {
-    if(req.params('zip_code')) {
-        console.log(req.params('zip_code'))
-        filterZip = req.params('zip_code')
-    }
-    else {
-        filterZip = 0;
-    }
+    filterZip = req.body.zip_code.toString().trim();
+    
    
     
     // Render listings.ejs

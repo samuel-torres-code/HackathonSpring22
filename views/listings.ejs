@@ -36,13 +36,29 @@
           background-color: #000000;
           color: white;
       }
+
+      .button2 {
+          background-color: #E4DEAE;
+          border: 5px solid #000000;
+          padding: 0px 60px;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 30px;
+          margin: 4px 2px;
+          transition-duration: 0.3s;
+          cursor: pointer;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+      }
       .center {
           display: flex;
           justify-content: center;
           align-items: center;
           height: 200px;
        }
-
+       .inputText {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif,
+        font-size:15px
+       }
       .wrapper {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -84,10 +100,17 @@
         display: flex;
         flex-flow: row wrap;
         align-items: center;
+        height: 15%;
         }
         #zip_code {
             vertical-align: middle;
         }
+        .right {
+        position: absolute;
+        right: 0px;
+        width: 250px;
+        
+      }
         
 
     </style>
@@ -95,18 +118,19 @@
 
 <body style="background-color:#133A1B;">
     <div class="inline-block">
-        <form method="post" class="form-inline" >
+        <form class="form-inline" >
         
             
-      <input type="number" id="zip_code" placeholder="enter zip code" name="zip_code">
+      <input type="number" class="inputText" id="zip_code" placeholder="enter zip code" name="zip_code">
             
-      <button class="button button2">filter</button>
+      <button id="btn" class="button1 button2" >filter</button>
           </form> 
     
-                
+            <div class="right">
             <a href="/post">
           <button class="button button1">post</button>
         </a>
+      </div>
     </div>
     
         
@@ -129,46 +153,38 @@
       </div>
       <% }) %>
     </div>
-      
-      <!-- <div class = "square">
-        <h1 >title2</h1>
-        <h2>desc</h2>
+      <!-- Code to interact with the backend -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+          const handleSubmit = (ev) => {
+            ev.preventDefault();
+            
+            let formData = {
+                zip_code: document.getElementById('zip_code') ? document.getElementById('zip_code').value :0
+            };
 
-        location
+            console.log(formData['zip_code'])
+            axios.post('/listings', {
+                zip_code: formData['zip_code']
+            })
+            .then(function (response) {
+                
+                window.location = "/listings"
+            
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            
+        
 
-      </div>
-      
-      <div class = "square">
-        <h1 >title3</h1>
-        <h2>desc</h2>
+            console.log(formData);
+        }
 
-        location
-
-      </div>
-
-      <div class = "square">
-        <h1 >title4</h1>
-        <h2>desc</h2>
-
-        location
-
-      </div>
-
-      <div class = "square">
-        <h1 >title5</h1>
-        <h2>desc</h2>
-
-        location
-
-      </div>
-      
-      <div class = "square">
-        <h1 >title6</h1>
-        <h2>desc</h2>
-
-        location
-
-      </div> -->
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btn').addEventListener('click', handleSubmit);
+        });
+      </script>
     
 </body>
 </html>
