@@ -1,12 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Item</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
+
 <body>
-    <h2>Post</h2>
+    <style>
+        form-page-container {
+            background-color: #133A1B;
+        }
+
+        form-container {
+            background-color: #B7BF96
+        }
+    </style>
+    <div class="form-page-container">
+        <div class="form-container">
+            <form >
+                <input class="input" type="text" placeholder="title" id="title">
+                <textarea class="textarea" placeholder="description" id="description"></textarea>
+                <input class="input" type="email" placeholder="e-mail" id="email">
+                <input class="input" type="number" placeholder="phone number" id="phone_number">
+                <input class="input" type="text" placeholder="location" id="location">
+                
+                
+                    
+                    
+
+                <button  id="btn">Submit</button>
+
+            </form>
+
+
+            
+            
+            
+
+        </div>
+    </div>
+
+    
+
+    <!-- Code to interact with the backend -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        let datas = [];
+        const handleSubmit = (ev) => {
+            ev.preventDefault();
+
+            let formData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                email: document.getElementById('email').value,
+                phone_number: document.getElementById('phone_number').value? document.getElementById('phone_number').value: 0 ,
+                location: document.getElementById('location').value,
+                imageName: ""
+
+
+            }
+            console.log(formData['phone_number'])
+            axios.post('/post-listing', {
+                title: formData['title'],
+                description: formData['description'],
+                email: formData['email'],
+                phone_number: formData['phone_number'],
+                location: formData['location'],
+                imageName: formData['imageName']
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        
+
+            console.log(formData);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btn').addEventListener('click', handleSubmit);
+        });
+    </script>
 </body>
+
 </html>
