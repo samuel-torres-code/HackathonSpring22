@@ -4,12 +4,29 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const multer = require('multer')
+const fs = require('fs')
+const path = require('path')
 
 
 // Configure Database, Clears database each time server restarts
 const loki = require('lokijs');
 var db = new loki('example.db');
 var jokes = db.addCollection('jokes');
+var posts = db.addCollection('posts');
+
+
+//MongoDB
+// const MongoClient = require('mongodb').MongoClient
+// const myurl = 'mongodb://localhost:27017';
+
+// MongoClient.connect(myurl, (err, client) => {
+//   if (err) return console.log(err)
+//   db = client.db('test') 
+//   app.listen(3000, () => {
+//     console.log('listening on 3000')
+//   })
+// })
 
 // Configure Express Application
 var app = express() 
@@ -24,8 +41,23 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+// SET STORAGE
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        console.log(file);
+      cb(null, Date.now() + path.extname(file.originalname))
+    }
+  })
+  
+  var upload = multer({ storage: storage })
+
 // Use the ejs templating engine in the views folder
 app.set('view engine', 'ejs');
+
 
 
 app.post('/upvote-joke', (req, res) => {
@@ -65,11 +97,25 @@ app.get('/listings', (req, res) => {
     // Render listings.ejs
     res.render('listings')
 })
+
 app.get('/post', (req, res) => {
 
+    
+        res.render('post')
+    
     // Render listings.ejs
-    res.render('post')
 })
+
+
+//uploadphoto handler
+app.post('/upload-photo', upload.single("image") ,(req, res) => {
+    
+    res.send('Image Uploaded')
+  
+})
+
+
+
 
 // Leaderboard Page
 app.get('/leaderboard', (req, res) => {

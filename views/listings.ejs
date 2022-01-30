@@ -6,18 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listings</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    
+    <style>
+      .button {
+          background-color: #E4DEAE;
+          border: 5px solid #000000;
+          color: white;
+          padding: 0px 60px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 40px;
+          margin: 4px 2px;
+          transition-duration: 0.3s;
+          cursor: pointer;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+      }
+      .button1 {
+          background-color: #E4DEAE; 
+          color: black; 
+          border: 4px solid #000000;
+          border-radius: 32px;
+      }
+      .button1:hover {
+          background-color: #000000;
+          color: white;
+      }
+      .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200px;
+       }
+    </style>
 </head>
-<body>
-    <h2>Listing</h2>
-    <a href="/post">
-        <button class="button-danger">post</button>
-    </a>
+<body style="background-color:#133A1B;">
+    <div class="center">
+      <a href = "/post">
+          <button class="button button1">post</button>
+      </a>
+    </div>
 
     <div class="tile is-ancestor">
         <div class="tile is-4 is-parent">
           <div class="tile is-child box">
-            <p class="title">Listing One</p>
-            <p class="subtitle">Description here</p>
+            <article class="tile is-child notification is-dark">
+              <p class="title">Listing One</p>
+              <p class="subtitle">Description</p>
+            </article>
             <figure class="image is-4by3">
                 <img src="https://bulma.io/images/placeholders/640x480.png">
             </figure>
@@ -29,8 +65,10 @@
 
         <div class="tile is-4 is-parent">
           <div class="tile is-child box">
-            <p class="title">Listing Two</p>
-            <p class="subtitle">Description here</p>
+            <article class="tile is-child notification is-dark">
+              <p class="title">Listing Two</p>
+              <p class="subtitle">Description here</p>
+            </article>
             <figure class="image is-4by3">
                 <img src="https://bulma.io/images/placeholders/640x480.png">
             </figure>
@@ -39,8 +77,10 @@
 
         <div class="tile is-4 is-parent">
             <div class="tile is-child box">
-              <p class="title">Listing Three</p>
-              <p class="subtitle">Description here</p>
+              <article class="tile is-child notification is-dark">
+                <p class="title">Listing Three</p>
+                <p class="subtitle">Description here</p>
+              </article>
               <figure class="image is-4by3">
                   <img src="https://bulma.io/images/placeholders/640x480.png">
               </figure>
@@ -51,8 +91,10 @@
     <div class="tile is-ancestor">
         <div class="tile is-4 is-parent">
           <div class="tile is-child box">
-            <p class="title">Listing Four</p>
-            <p class="subtitle">Description here</p>
+            <article class="tile is-child notification is-dark">
+              <p class="title">Listing Four</p>
+              <p class="subtitle">Description here</p>
+            </article>
             <figure class="image is-4by3">
                 <img src="https://bulma.io/images/placeholders/640x480.png">
             </figure>
@@ -61,8 +103,10 @@
 
         <div class="tile is-4 is-parent">
           <div class="tile is-child box">
-            <p class="title">Listing Five</p>
-            <p class="subtitle">Description here</p>
+            <article class="tile is-child notification is-dark">
+              <p class="title">Listing Five</p>
+              <p class="subtitle">Description here</p>
+            </article>
             <figure class="image is-4by3">
                 <img src="https://bulma.io/images/placeholders/640x480.png">
             </figure>
@@ -71,8 +115,10 @@
 
         <div class="tile is-4 is-parent">
             <div class="tile is-child box">
-              <p class="title">Listing Six</p>
-              <p class="subtitle">Description here</p>
+              <article class="tile is-child notification is-dark">
+                <p class="title">Listing Six</p>
+                <p class="subtitle">Description here</p>
+              </article>
               <figure class="image is-4by3">
                   <img src="https://bulma.io/images/placeholders/640x480.png">
               </figure>
