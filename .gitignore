@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-/node_modules/
-=======
-uploads/*
-node_modules/*
->>>>>>> cb1468331f8a8aedda5840c665f49d08fd84fe71
+uploads/
+node_modules/

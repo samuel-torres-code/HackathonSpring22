@@ -7,26 +7,22 @@ const bodyParser = require('body-parser')
 const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
+const { v4: uuidv4 } = require('uuid');
+
+
+
 
 
 // Configure Database, Clears database each time server restarts
 const loki = require('lokijs');
+const { time } = require('console')
 var db = new loki('example.db');
 var jokes = db.addCollection('jokes');
-var posts = db.addCollection('posts');
+//var listings = db.addCollection('listings');
 
 
-//MongoDB
-// const MongoClient = require('mongodb').MongoClient
-// const myurl = 'mongodb://localhost:27017';
 
-// MongoClient.connect(myurl, (err, client) => {
-//   if (err) return console.log(err)
-//   db = client.db('test') 
-//   app.listen(3000, () => {
-//     console.log('listening on 3000')
-//   })
-// })
+
 
 // Configure Express Application
 var app = express() 
@@ -80,6 +76,32 @@ app.post('/upvote-joke', (req, res) => {
         // Save Joke 
         jokes.update(current_joke)
     }
+
+    // Send 'ok' status back
+    res.sendStatus(200)
+})
+
+//post-listing
+app.post('/post-listing', (req, res) => {
+    //console.log(req.body.title)
+
+    // listings.insert({
+    //     id: uuidv4(),
+    //     title: req.body.title,
+    //     description: req.body.description,
+    //     email: req.body.email,
+    //     phone_number: req.body.phone_number,
+    //     location: req.body.location,
+    //     imageName: req.body.imageName,
+    //     dateCreated: Date.now()
+    // });
+    // listings.update();
+
+
+
+    //var debugListing = console.debug(listings.findOne());
+
+    
 
     // Send 'ok' status back
     res.sendStatus(200)
