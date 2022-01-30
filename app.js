@@ -4,6 +4,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const querystring = require('querystring')
 const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
@@ -41,7 +42,7 @@ app.use(morgan('dev'));
 
 // Allow for req.body to be utilized in '/upvote-joke'
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // SET STORAGE
@@ -121,6 +122,7 @@ app.get('/random-listings', (req, res) => {
 //post-listing
 app.post('/post-listing', (req, res) => {
     //console.log(req.body.title)
+    
 
     var listing = listings.insert({
                     id: uuidv4(),
@@ -151,13 +153,41 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+var filterZip = 0
 app.get('/listings', (req, res) => {
 
-    // Render listings.ejs
+   if (filterZip == 0) {
     res.render('listings',{
         data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
     })
+   }
+   else {
+       console.log("filterZip ="+filterZip)
+    res.render('listings',{
+        data: listings.chain().find({}).where(function(obj) {
+            return obj.zip_code === filterZip;
+          }).simplesort('dateAdded').data().reverse()
+    })
+   }
+    
+    // Render listings.ejs
+    
 })
+
+app.post('/listings', (req, res) => {
+    if(req.params('zip_code')) {
+        console.log(req.params('zip_code'))
+        filterZip = req.params('zip_code')
+    }
+    else {
+        filterZip = 0;
+    }
+   
+    
+    // Render listings.ejs
+    res.redirect('/listings')
+})
+
 
 app.get('/post', (req, res) => {
 
@@ -197,4 +227,5 @@ app.listen(3000, () => {
 app.use( express.static( "img" ) );
 var cors = require('cors');
 const { red } = require('color-name')
+const { fieldOffs } = require('tar')
 app.use(cors());

@@ -13,7 +13,6 @@
           border: 5px solid #000000;
           color: white;
           padding: 0px 60px;
-          text-align: center;
           text-decoration: none;
           display: inline-block;
           font-size: 40px;
@@ -22,11 +21,16 @@
           cursor: pointer;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
       }
+      .row {
+      display: inline;
+        float: left;
+      }
       .button1 {
           background-color: #E4DEAE; 
           color: black; 
           border: 4px solid #000000;
           border-radius: 32px;
+          align-self: flex-end;
       }
       .button1:hover {
           background-color: #000000;
@@ -63,7 +67,9 @@
         font-size: 25px;
         
       }
-
+      html, body {
+            height: 100%;
+        }
       h1 {
         text-align: center;
         font-size:40px
@@ -73,16 +79,40 @@
         text-align: center;
         font-size:25px
       }
+      /* Style the form - display items horizontally */
+        .inline-block {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        }
+        #zip_code {
+            vertical-align: middle;
+        }
+        
 
     </style>
 </head>
 
 <body style="background-color:#133A1B;">
-    <div class="center">
-      <a href = "/post">
+    <div class="inline-block">
+        <form method="post" class="form-inline" >
+        
+            
+      <input type="number" id="zip_code" placeholder="enter zip code" name="zip_code">
+            
+      <button class="button button2">filter</button>
+          </form> 
+    
+                
+            <a href="/post">
           <button class="button button1">post</button>
-      </a>
+        </a>
     </div>
+    
+        
+
+      
+    
 
     <div class="wrapper">
         <% data.forEach((listing) => { %>
