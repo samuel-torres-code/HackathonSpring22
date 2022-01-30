@@ -92,11 +92,10 @@ app.get('/random-listings', (req, res) => {
         
     var listing = listings.insert({
                     id: uuidv4(),
-                    title: "Title",
-                    description: "This is a Description",
-                    email: "tamuhack@tamu.edu",
-                    phone_number: "8325457864",
-                    location: "907 Cross Street",
+                    title: "fdsfdsfsdgfsd",
+                    description: "dsafsdfswfsdfsdfsdfsdfdsfdsfds",
+                    zip_code: 1213,
+                    location: "ddsadasdasf",
                     imageName: "",
                     dateCreated: Date.now()
                     });
@@ -110,9 +109,7 @@ app.get('/random-listings', (req, res) => {
     
 
     // Send 'ok' status back
-    res.render('listings',{
-        data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
-    })
+    res.sendStatus(200)
 })
 
 
@@ -124,8 +121,7 @@ app.post('/post-listing', (req, res) => {
                     id: uuidv4(),
                     title: req.body.title,
                     description: req.body.description,
-                    email: req.body.email,
-                    phone_number: req.body.phone_number,
+                    zip_code: req.body.zip_code,
                     location: req.body.location,
                     imageName: req.body.imageName,
                     dateCreated: Date.now()
@@ -139,7 +135,7 @@ app.post('/post-listing', (req, res) => {
     
 
     // Send 'ok' status back
-    res.redirect("/listings")
+    res.redirect('/listings');
 })
 
 //Home Page
@@ -193,3 +189,6 @@ app.listen(3000, () => {
     console.log("Server is running")
 })
 app.use( express.static( "img" ) );
+var cors = require('cors');
+const { red } = require('color-name')
+app.use(cors());

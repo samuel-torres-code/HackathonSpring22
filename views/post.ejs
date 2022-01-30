@@ -22,22 +22,19 @@
     </style>
     <div class="form-page-container">
         <div class="form-container">
-            <form>
+            <form >
                 <input class="input" type="text" placeholder="title" id="title">
                 <textarea class="textarea" placeholder="description" id="description"></textarea>
-                <input class="input" type="email" placeholder="e-mail" id="email">
-                <input class="input" type="number" placeholder="phone number" id="phone_number">
+                <input class="input" type="number" placeholder="zip code" id="zip_code">
                 <input class="input" type="text" placeholder="location" id="location">
                 
-                    
-                <button  id="btn">Submit</button>
                 
+            
+                    
+
+                <button  id="btn">Submit</button>
 
             </form>
-            <button class="js-modal-trigger" data-target="modal-js-example">
-                Upload
-            </button>
-            
 
 
             <!-- <form action="/upload-photo" enctype="multipart/form-data" method="POST">
@@ -54,66 +51,53 @@
 
         </div>
 
-    
-
-    
-      
-    <!-- Code to interact with the backend -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <div id="modal-js-example" class="modal">
         <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
-      <button class="delete" aria-label="close"></button>
-    </header>
-    <form action="/upload-photo" enctype="multipart/form-data" method="POST">
-    <section class="modal-card-body">
-        
-        <input type="file" name="image" />
-        
+      
+        <div class="modal-content">
+          <div class="box">
+            <p>Modal JS example</p>
+            <!-- Your content -->
+          </div>
+        </div>
+      
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
 
-        
-    </section>
     
-    <footer class="modal-card-foot">
-      <button class="button is-success" type="submit">Submit</button>
-    </form>
-    </footer>
-  </div>
-    </div>
+
+    <!-- Code to interact with the backend -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
         let datas = [];
         const handleSubmit = (ev) => {
-            //ev.preventDefault();
+            ev.preventDefault();
 
             let formData = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
-                email: document.getElementById('email').value,
-                phone_number: document.getElementById('phone_number').value? document.getElementById('phone_number').value: 0 ,
+                phone_number: document.getElementById('zip_code').value? document.getElementById('zip_code').value: 0 ,
                 location: document.getElementById('location').value,
                 imageName: ""
-
-
             }
             console.log(formData['phone_number'])
             axios.post('/post-listing', {
                 title: formData['title'],
                 description: formData['description'],
-                email: formData['email'],
-                phone_number: formData['phone_number'],
+                zip_code: formData['zip_code'],
                 location: formData['location'],
                 imageName: formData['imageName']
             })
             .then(function (response) {
-                console.log(response);
+                
+                window.location = "/listings"
+            
             })
             .catch(function (error) {
                 console.log(error);
             });
+            
         
 
             console.log(formData);
@@ -121,49 +105,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('btn').addEventListener('click', handleSubmit);
-
-            function openModal($el) {
-                $el.classList.add('is-active');
-            }
-
-            function closeModal($el) {
-                $el.classList.remove('is-active');
-            }
-
-            function closeAllModals() {
-                (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-                closeModal($modal);
-                });
-            }
-
-            // Add a click event on buttons to open a specific modal
-            (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-                const modal = $trigger.dataset.target;
-                const $target = document.getElementById(modal);
-                console.log($target);
-
-                $trigger.addEventListener('click', () => {
-                openModal($target);
-                });
-            });
-
-            // Add a click event on various child elements to close the parent modal
-            (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-                const $target = $close.closest('.modal');
-
-                $close.addEventListener('click', () => {
-                closeModal($target);
-                });
-            });
-
-            // Add a keyboard event to close all modals
-            document.addEventListener('keydown', (event) => {
-                const e = event || window.event;
-
-                if (e.keyCode === 27) { // Escape key
-                closeAllModals();
-                }
-            });
         });
     </script>
 </body>
