@@ -12,22 +12,27 @@
     <a href="/post">
         <button class="button-danger">post</button>
     </a>
-
     <div class="tile is-ancestor">
-        <div class="tile is-4 is-parent">
+        
+    <% data.forEach((listing) => { %>
+    
+        <div class="tile is-one-third is-parent">
           <div class="tile is-child box">
-            <p class="title">Listing One</p>
-            <p class="subtitle">Description here</p>
+            <p class="title"><%= listing.title %></p>
+            <p class="subtitle"><%= listing.description %></p>
             <figure class="image is-4by3">
                 <img src="https://bulma.io/images/placeholders/640x480.png">
             </figure>
-            <p class="subtitle">Address</p>
-            <p class="subtitle">Phone</p>
-            <p class="subtitle">Email</p>
+            <p class="subtitle"><%= listing.location %></p>
+            <p class="subtitle"><%= listing.phone_number %></p>
+            <p class="subtitle"><%= listing.email %></p>
           </div>
-        </div>
+          </div>
 
-        <div class="tile is-4 is-parent">
+        
+        <% }) %>
+          </div>
+        <!-- <div class="tile is-4 is-parent">
           <div class="tile is-child box">
             <p class="title">Listing Two</p>
             <p class="subtitle">Description here</p>
@@ -77,8 +82,8 @@
                   <img src="https://bulma.io/images/placeholders/640x480.png">
               </figure>
             </div>
-        </div>
+        </div> -->
         
-    </div>
+    
 </body>
 </html>

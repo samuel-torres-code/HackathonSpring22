@@ -16,8 +16,10 @@ const { v4: uuidv4 } = require('uuid');
 // Configure Database, Clears database each time server restarts
 const loki = require('lokijs');
 const { time } = require('console')
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require('constants')
 var db = new loki('example.db');
 var jokes = db.addCollection('jokes');
+var listings = db.addCollection('listings', { indices: ['id'] });
 //var listings = db.addCollection('listings');
 
 
@@ -81,21 +83,24 @@ app.post('/upvote-joke', (req, res) => {
     res.sendStatus(200)
 })
 
-//post-listing
-app.post('/post-listing', (req, res) => {
-    //console.log(req.body.title)
 
-    // listings.insert({
-    //     id: uuidv4(),
-    //     title: req.body.title,
-    //     description: req.body.description,
-    //     email: req.body.email,
-    //     phone_number: req.body.phone_number,
-    //     location: req.body.location,
-    //     imageName: req.body.imageName,
-    //     dateCreated: Date.now()
-    // });
-    // listings.update();
+app.post('/random-listings', (req, res) => {
+    //console.log(req.body.title)
+    for(let i = 0; i< 99; i++) {
+
+        
+    var listing = listings.insert({
+                    id: uuidv4(),
+                    title: "Title",
+                    description: "This is a Description",
+                    email: "tamuhack@tamu.edu",
+                    phone_number: "8325457864",
+                    location: "907 Cross Street",
+                    imageName: "",
+                    dateCreated: Date.now()
+                    });
+    listings.update(listing);
+                }
 
 
 
@@ -105,6 +110,35 @@ app.post('/post-listing', (req, res) => {
 
     // Send 'ok' status back
     res.sendStatus(200)
+})
+
+
+//post-listing
+app.post('/post-listing', (req, res) => {
+    //console.log(req.body.title)
+
+    var listing = listings.insert({
+                    id: uuidv4(),
+                    title: req.body.title,
+                    description: req.body.description,
+                    email: req.body.email,
+                    phone_number: req.body.phone_number,
+                    location: req.body.location,
+                    imageName: req.body.imageName,
+                    dateCreated: Date.now()
+                    });
+    listings.update(listing);
+
+
+
+    //var debugListing = console.debug(listings.findOne());
+
+    
+
+    // Send 'ok' status back
+    res.render('listings',{
+        data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
+    })
 })
 
 //Home Page
@@ -117,7 +151,9 @@ app.get('/', (req, res) => {
 app.get('/listings', (req, res) => {
 
     // Render listings.ejs
-    res.render('listings')
+    res.render('listings',{
+        data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
+    })
 })
 
 app.get('/post', (req, res) => {
