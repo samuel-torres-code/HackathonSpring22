@@ -35,6 +35,9 @@
                 <button  id="btn">Submit</button>
 
             </form>
+
+
+            
             
             
 
@@ -55,15 +58,28 @@
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
                 email: document.getElementById('email').value,
-                phone_number: document.getElementById('phone_number').value,
+                phone_number: document.getElementById('phone_number').value? document.getElementById('phone_number').value: 0 ,
                 location: document.getElementById('location').value,
-                photo: document.getElementById('photo').value,
+                imageName: ""
 
 
             }
-            
-
-            
+            console.log(formData['phone_number'])
+            axios.post('/post-listing', {
+                title: formData['title'],
+                description: formData['description'],
+                email: formData['email'],
+                phone_number: formData['phone_number'],
+                location: formData['location'],
+                imageName: formData['imageName']
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        
 
             console.log(formData);
         }
