@@ -120,7 +120,8 @@ app.get('/random-listings', (req, res) => {
 
 //post-listing
 app.post('/post-listing', (req, res) => {
-    //console.log(req.body.title)
+    // console.log(req.body.title)
+    var good = true;
 
     var listing = listings.insert({
                     id: uuidv4(),
@@ -131,9 +132,25 @@ app.post('/post-listing', (req, res) => {
                     imageName: fileId + currExt,
                     dateCreated: Date.now()
                     });
-    listings.update(listing);
-    fileId ++;
+    
 
+    if (
+        listing.title == "" ||
+        listing.description == "" ||
+        req.body.zip_code == 0 ||
+        req.body.location == ""
+    ) {
+        good = false;
+        res.sendStatus(422);
+    }
+
+    console.log(error);
+
+    if (good) {
+        listings.update(listing);
+        fileId ++;
+        res.redirect('/listings');
+    }
 
 
     //var debugListing = console.debug(listings.findOne());
@@ -141,7 +158,7 @@ app.post('/post-listing', (req, res) => {
     
 
     // Send 'ok' status back
-    res.redirect('/listings');
+    // res.redirect('/listings');
 })
 
 //Home Page
@@ -197,4 +214,6 @@ app.listen(3000, () => {
 app.use( express.static( "img" ) );
 var cors = require('cors');
 const { red } = require('color-name')
+const { empty } = require('statuses')
+const { list } = require('tar')
 app.use(cors());
