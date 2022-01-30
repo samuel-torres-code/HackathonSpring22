@@ -7,10 +7,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Item</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 100%;
+          background-color:#133A1B;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        
+        div {
+          border-radius: 5px;
+          background-color:#133A1B;
+          padding: 20px;
+        }
 
+        label {
+            color: #E4DEAE;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .button {
+            display: inline-block;
+            border-radius: 8px;
+            background-color: #B7BF96;
+            border: none;
+            color: #000000;
+            text-align: center;
+            font-size: 24px;
+            padding: 0px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 0px;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+       .button:hover span {
+            padding-right: 25px;
+        }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+    </style>
 </head>
 
-<body>
+<body style="background-color:#133A1B;">
+    <a href="/listings">
+        <img src="back.png" alt="back" style="width:210px;height:126px">
+    </a>
     <style>
         form-page-container {
             background-color: #133A1B;
@@ -22,22 +106,20 @@
     </style>
     <div class="form-page-container">
         <div class="form-container">
-            <form>
-                <input class="input" type="text" placeholder="title" id="title">
+            <form >
+                <label for="title">enter your title...</label>
+                <input class="input" type="text" placeholder="title" id="title" required>
+                <label for="descrption">enter your description...</label>
                 <textarea class="textarea" placeholder="description" id="description"></textarea>
-                <input class="input" type="email" placeholder="e-mail" id="email">
-                <input class="input" type="number" placeholder="phone number" id="phone_number">
-                <input class="input" type="text" placeholder="location" id="location">
-                
-                    
-                <button  id="btn">Submit</button>
-                
+                <label for="zip_code">enter your zip code...</label>
+                <input class="input" type="number" placeholder="zip code" id="zip_code" required>
+                <label for="location">enter your location...</label>
+                <input class="input" type="text" placeholder="location" id="location" required>
+
+
+                <button id="btn" class="button" style="vertical-align:middle"><span>submit</span></button>
 
             </form>
-            <button class="js-modal-trigger" data-target="modal-js-example">
-                Upload
-            </button>
-            
 
 
             <!-- <form action="/upload-photo" enctype="multipart/form-data" method="POST">
@@ -46,43 +128,48 @@
 
             </form> -->
 
-
             
-
+            
+            <button class="button is-large js-modal-trigger" data-target="modal-js-example">
+              <span class="icon is-medium">
+                <i class="fab fa-file-image"></i>
+              </span>
+              <span>upload</span>
+            </button>  
             
             
 
         </div>
 
-    
-
-    
-      
-    <!-- Code to interact with the backend -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <div id="modal-js-example" class="modal">
         <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Modal title</p>
+      <p class="modal-card-title">upload file</p>
       <button class="delete" aria-label="close"></button>
     </header>
-    <form action="/upload-photo" enctype="multipart/form-data" method="POST">
     <section class="modal-card-body">
-        
-        <input type="file" name="image" />
-        
+        <form action="/upload-photo" enctype="multipart/form-data" method="POST">
+            <input type="file" name="image" id="image" />
+
 
         
+
+
     </section>
-    
     <footer class="modal-card-foot">
-      <button class="button is-success" type="submit">Submit</button>
-    </form>
+      <button class="button is-success"type ="submit" id="uploadBtn">upload</button>
+        </form>
+    </form> 
+
     </footer>
   </div>
-    </div>
+      </div>
+
+    
+
+    <!-- Code to interact with the backend -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
         let datas = [];
@@ -92,28 +179,27 @@
             let formData = {
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
-                email: document.getElementById('email').value,
-                phone_number: document.getElementById('phone_number').value? document.getElementById('phone_number').value: 0 ,
+                zip_code: document.getElementById('zip_code').value? document.getElementById('zip_code').value: 0 ,
                 location: document.getElementById('location').value,
-                imageName: ""
-
-
+                imageName: document.getElementById('image').files.length == 1 ? document.getElementById('image').files[0].imageName : ""
             }
             console.log(formData['phone_number'])
             axios.post('/post-listing', {
                 title: formData['title'],
                 description: formData['description'],
-                email: formData['email'],
-                phone_number: formData['phone_number'],
+                zip_code: formData['zip_code'],
                 location: formData['location'],
                 imageName: formData['imageName']
             })
             .then(function (response) {
-                console.log(response);
+                
+                window.location = "/listings"
+            
             })
             .catch(function (error) {
                 console.log(error);
             });
+            
         
 
             console.log(formData);
@@ -123,47 +209,47 @@
             document.getElementById('btn').addEventListener('click', handleSubmit);
 
             function openModal($el) {
-                $el.classList.add('is-active');
-            }
+    $el.classList.add('is-active');
+  }
 
-            function closeModal($el) {
-                $el.classList.remove('is-active');
-            }
+  function closeModal($el) {
+    $el.classList.remove('is-active');
+  }
 
-            function closeAllModals() {
-                (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-                closeModal($modal);
-                });
-            }
+  function closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      closeModal($modal);
+    });
+  }
 
-            // Add a click event on buttons to open a specific modal
-            (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-                const modal = $trigger.dataset.target;
-                const $target = document.getElementById(modal);
-                console.log($target);
+  // Add a click event on buttons to open a specific modal
+  (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+    const modal = $trigger.dataset.target;
+    const $target = document.getElementById(modal);
+    console.log($target);
 
-                $trigger.addEventListener('click', () => {
-                openModal($target);
-                });
-            });
+    $trigger.addEventListener('click', () => {
+      openModal($target);
+    });
+  });
 
-            // Add a click event on various child elements to close the parent modal
-            (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-                const $target = $close.closest('.modal');
+  // Add a click event on various child elements to close the parent modal
+  (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+    const $target = $close.closest('.modal');
 
-                $close.addEventListener('click', () => {
-                closeModal($target);
-                });
-            });
+    $close.addEventListener('click', () => {
+      closeModal($target);
+    });
+  });
 
-            // Add a keyboard event to close all modals
-            document.addEventListener('keydown', (event) => {
-                const e = event || window.event;
+  // Add a keyboard event to close all modals
+  document.addEventListener('keydown', (event) => {
+    const e = event || window.event;
 
-                if (e.keyCode === 27) { // Escape key
-                closeAllModals();
-                }
-            });
+    if (e.keyCode === 27) { // Escape key
+      closeAllModals();
+    }
+  });
         });
     </script>
 </body>

@@ -4,11 +4,13 @@
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const querystring = require('querystring')
 const multer = require('multer')
 const fs = require('fs')
 const path = require('path')
 const { v4: uuidv4 } = require('uuid');
-
+var fileId = 0
+var currExt = ".jpg"
 
 
 
@@ -33,12 +35,14 @@ var app = express()
 // Where to store frontend assets
 app.use(express.static('public'));
 
+app.use('/uploads', express.static('uploads'));
+
 // Logging (Optional)
 app.use(morgan('dev'));
 
 // Allow for req.body to be utilized in '/upvote-joke'
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // SET STORAGE
@@ -48,7 +52,8 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         console.log(file);
-      cb(null, Date.now() + path.extname(file.originalname))
+        currExt = path.extname(file.originalname);
+      cb(null, fileId + currExt)
     }
   })
   
@@ -92,15 +97,15 @@ app.get('/random-listings', (req, res) => {
         
     var listing = listings.insert({
                     id: uuidv4(),
-                    title: "Title",
-                    description: "This is a Description",
-                    email: "tamuhack@tamu.edu",
-                    phone_number: "8325457864",
-                    location: "907 Cross Street",
-                    imageName: "",
+                    title: "fdsfdsfsdgfsd",
+                    description: "dsafsdfswfsdfsdfsdfsdfdsfdsfds",
+                    zip_code: "1213",
+                    location: "ddsadasdasf",
+                    imageName: fileId,
                     dateCreated: Date.now()
                     });
     listings.update(listing);
+    
                 }
 
 
@@ -110,28 +115,44 @@ app.get('/random-listings', (req, res) => {
     
 
     // Send 'ok' status back
-    res.render('listings',{
-        data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
-    })
+    res.sendStatus(200)
 })
 
 
 //post-listing
 app.post('/post-listing', (req, res) => {
-    //console.log(req.body.title)
+
+    var good = true;
+
 
     var listing = listings.insert({
                     id: uuidv4(),
                     title: req.body.title,
                     description: req.body.description,
-                    email: req.body.email,
-                    phone_number: req.body.phone_number,
+                    zip_code: req.body.zip_code.toString().trim(),
                     location: req.body.location,
-                    imageName: req.body.imageName,
+                    imageName: fileId + currExt,
                     dateCreated: Date.now()
                     });
-    listings.update(listing);
+    
 
+    if (
+        listing.title == "" ||
+        listing.description == "" ||
+        req.body.zip_code == 0 ||
+        req.body.location == ""
+    ) {
+        good = false;
+        res.sendStatus(422);
+    }
+
+    console.log(error);
+
+    if (good) {
+        listings.update(listing);
+        fileId ++;
+        res.redirect('/listings');
+    }
 
 
     //var debugListing = console.debug(listings.findOne());
@@ -139,7 +160,7 @@ app.post('/post-listing', (req, res) => {
     
 
     // Send 'ok' status back
-    res.redirect("/listings")
+    // res.redirect('/listings');
 })
 
 //Home Page
@@ -149,13 +170,35 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+var filterZip = ""
 app.get('/listings', (req, res) => {
 
-    // Render listings.ejs
+   if (filterZip == "") {
     res.render('listings',{
         data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
     })
+   }
+   else {
+       console.log("filterZip ="+filterZip)
+    res.render('listings',{
+        data: listings.chain().find({'zip_code':filterZip.toString()}).simplesort('dateAdded').data().reverse()
+    })
+    
+   }
+    
+    // Render listings.ejs
+    
 })
+
+app.post('/listings', (req, res) => {
+    filterZip = req.body.zip_code.toString().trim();
+    
+   
+    
+    // Render listings.ejs
+    res.redirect('/listings')
+})
+
 
 app.get('/post', (req, res) => {
 
@@ -169,7 +212,7 @@ app.get('/post', (req, res) => {
 //uploadphoto handler
 app.post('/upload-photo', upload.single("image") ,(req, res) => {
     
-    res.send('Image Uploaded')
+    console.log('image')
   
 })
 
@@ -193,3 +236,12 @@ app.listen(3000, () => {
     console.log("Server is running")
 })
 app.use( express.static( "img" ) );
+var cors = require('cors');
+const { red } = require('color-name')
+
+const { fieldOffs } = require('tar')
+
+const { empty } = require('statuses')
+const { list } = require('tar')
+
+app.use(cors());
