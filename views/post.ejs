@@ -37,11 +37,16 @@
 
             </form>
 
+
             <!-- <form action="/upload-photo" enctype="multipart/form-data" method="POST">
                 <input type="file" name="image" />
                 <button class="button" type="submit" >Upload</button> 
 
             </form> -->
+
+
+            
+
             
             
 
@@ -74,15 +79,28 @@
                 title: document.getElementById('title').value,
                 description: document.getElementById('description').value,
                 email: document.getElementById('email').value,
-                phone_number: document.getElementById('phone_number').value,
+                phone_number: document.getElementById('phone_number').value? document.getElementById('phone_number').value: 0 ,
                 location: document.getElementById('location').value,
-                photo: document.getElementById('photo').value,
+                imageName: ""
 
 
             }
-            
-
-            
+            console.log(formData['phone_number'])
+            axios.post('/post-listing', {
+                title: formData['title'],
+                description: formData['description'],
+                email: formData['email'],
+                phone_number: formData['phone_number'],
+                location: formData['location'],
+                imageName: formData['imageName']
+            })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        
 
             console.log(formData);
         }
