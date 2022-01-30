@@ -93,7 +93,11 @@
 
         <%= listing.zip_code %>
         <%= listing.location %>
-        <img src="uploads/<%= listing.imageName %>" />
+        <img src="uploads/<%= listing.imageName %>"
+              width="600"
+              height="150"
+              style="width: 250px; height: 150px; object-fit: cover;"   
+        />
 
 
       </div>
