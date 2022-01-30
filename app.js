@@ -13,6 +13,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
+
 // Configure Database, Clears database each time server restarts
 const loki = require('lokijs');
 const { time } = require('console')
@@ -191,3 +192,4 @@ app.get('/leaderboard', (req, res) => {
 app.listen(3000, () => {
     console.log("Server is running")
 })
+app.use( express.static( "img" ) );
