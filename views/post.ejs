@@ -7,10 +7,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Item</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 100%;
+          background-color:#133A1B;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        
+        div {
+          border-radius: 5px;
+          background-color:#133A1B;
+          padding: 20px;
+        }
 
+        label {
+            color: #E4DEAE;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .button {
+            display: inline-block;
+            border-radius: 8px;
+            background-color: #B7BF96;
+            border: none;
+            color: #000000;
+            text-align: center;
+            font-size: 24px;
+            padding: 0px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 0px;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+       .button:hover span {
+            padding-right: 25px;
+        }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+    </style>
 </head>
 
-<body>
+<body style="background-color:#133A1B;">
+    <a href="/listings">
+        <img src="back.png" alt="back" style="width:210px;height:126px">
+    </a>
     <style>
         form-page-container {
             background-color: #133A1B;
@@ -23,16 +106,20 @@
     <div class="form-page-container">
         <div class="form-container">
             <form >
+                <label for="title">enter your title...</label>
                 <input class="input" type="text" placeholder="title" id="title">
+                <label for="descrption">enter your description...</label>
                 <textarea class="textarea" placeholder="description" id="description"></textarea>
+                <label for="zip_code">enter your zip code...</label>
                 <input class="input" type="number" placeholder="zip code" id="zip_code">
+                <label for="location">enter your location...</label>
                 <input class="input" type="text" placeholder="location" id="location">
                 
                 
             
                     
 
-                <button  id="btn">Submit</button>
+                <button id="btn" class="button" style="vertical-align:middle"><span>submit</span></button>
 
             </form>
 
