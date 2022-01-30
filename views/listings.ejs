@@ -48,6 +48,7 @@
       @media screen and (max-width: 1080px) {
         .wrapper {
           display: grid;
+          
           grid-template-columns: repeat(1, 1fr);
         }
       }
@@ -59,7 +60,8 @@
         border: 5px solid #000000;
         border-radius: 12px;
         text-align: center;
-        font-size: 25px
+        font-size: 25px;
+        
       }
 
       h1 {
@@ -83,15 +85,18 @@
     </div>
 
     <div class="wrapper">
+        <% data.forEach((listing) => { %>
       <div class = "square">
-        <h1 >title1</h1>
-        <h2>desc</h2>
+        <h1 ><%= listing.title %></h1>
+        <h2><%= listing.description %></h2>
 
-        location
+        <%= listing.title %>
 
       </div>
+      <% }) %>
+    </div>
       
-      <div class = "square">
+      <!-- <div class = "square">
         <h1 >title2</h1>
         <h2>desc</h2>
 
@@ -129,94 +134,7 @@
 
         location
 
-      </div>
-    </div>
+      </div> -->
     
-
-    <!-- <div class="tile is-ancestor">
-        <div class="tile is-4 is-parent">
-          <div class="tile is-child box">
-
-            <p class="title"><%= listing.title %></p>
-            <p class="subtitle"><%= listing.description %></p>
-
-            <article class="tile is-child notification is-dark">
-              <p class="title">Listing One</p>
-              <p class="subtitle">Description</p>
-            </article>
-
-            <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-            </figure>
-            <p class="subtitle"><%= listing.location %></p>
-            <p class="subtitle"><%= listing.phone_number %></p>
-            <p class="subtitle"><%= listing.email %></p>
-          </div>
-          </div>
-
-          
-         <div class="tile is-4 is-parent">
-          <div class="tile is-child box">
-            <article class="tile is-child notification is-dark">
-              <p class="title">Listing Two</p>
-              <p class="subtitle">Description here</p>
-            </article>
-            <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-            </figure>
-          </div>
-        </div>
-
-        <div class="tile is-4 is-parent">
-            <div class="tile is-child box">
-              <article class="tile is-child notification is-dark">
-                <p class="title">Listing Three</p>
-                <p class="subtitle">Description here</p>
-              </article>
-              <figure class="image is-4by3">
-                  <img src="https://bulma.io/images/placeholders/640x480.png">
-              </figure>
-            </div>
-        </div>
-
-    </div>
-    <div class="tile is-ancestor">
-        <div class="tile is-4 is-parent">
-          <div class="tile is-child box">
-            <article class="tile is-child notification is-dark">
-              <p class="title">Listing Four</p>
-              <p class="subtitle">Description here</p>
-            </article>
-            <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-            </figure>
-          </div>
-        </div>
-
-        <div class="tile is-4 is-parent">
-          <div class="tile is-child box">
-            <article class="tile is-child notification is-dark">
-              <p class="title">Listing Five</p>
-              <p class="subtitle">Description here</p>
-            </article>
-            <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-            </figure>
-          </div>
-        </div>
-
-        <div class="tile is-4 is-parent">
-            <div class="tile is-child box">
-              <article class="tile is-child notification is-dark">
-                <p class="title">Listing Six</p>
-                <p class="subtitle">Description here</p>
-              </article>
-              <figure class="image is-4by3">
-                  <img src="https://bulma.io/images/placeholders/640x480.png">
-              </figure>
-            </div>
-        </div>
-         -->
-    </div>
 </body>
 </html>

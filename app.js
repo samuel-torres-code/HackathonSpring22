@@ -85,7 +85,7 @@ app.post('/upvote-joke', (req, res) => {
 })
 
 
-app.post('/random-listings', (req, res) => {
+app.get('/random-listings', (req, res) => {
     //console.log(req.body.title)
     for(let i = 0; i< 99; i++) {
 
@@ -110,7 +110,9 @@ app.post('/random-listings', (req, res) => {
     
 
     // Send 'ok' status back
-    res.sendStatus(200)
+    res.render('listings',{
+        data: listings.chain().find({}).simplesort('dateAdded').data().reverse()
+    })
 })
 
 
