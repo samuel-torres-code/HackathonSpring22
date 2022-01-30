@@ -38,6 +38,40 @@
           align-items: center;
           height: 200px;
        }
+
+      .wrapper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+      }
+
+      @media screen and (max-width: 1080px) {
+        .wrapper {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+
+      .square {
+        height: 300px;
+        width: 300px;
+        background-color: #E4DEAE;
+        border: 5px solid #000000;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 25px
+      }
+
+      h1 {
+        text-align: center;
+        font-size:40px
+      }
+
+      h2 {
+        text-align: center;
+        font-size:25px
+      }
+
     </style>
 </head>
 <body style="background-color:#133A1B;">
@@ -47,7 +81,58 @@
       </a>
     </div>
 
-    <div class="tile is-ancestor">
+    <div class="wrapper">
+      <div class = "square">
+        <h1 >title1</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+      
+      <div class = "square">
+        <h1 >title2</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+      
+      <div class = "square">
+        <h1 >title3</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+
+      <div class = "square">
+        <h1 >title4</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+
+      <div class = "square">
+        <h1 >title5</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+      
+      <div class = "square">
+        <h1 >title6</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+    </div>
+    
+
+    <!-- <div class="tile is-ancestor">
         <div class="tile is-4 is-parent">
           <div class="tile is-child box">
             <article class="tile is-child notification is-dark">
@@ -124,7 +209,7 @@
               </figure>
             </div>
         </div>
-        
+         -->
     </div>
 </body>
 </html>
