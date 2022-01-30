@@ -122,7 +122,7 @@ app.get('/random-listings', (req, res) => {
 //post-listing
 app.post('/post-listing', (req, res) => {
 
-    var good = true;
+    
 
 
     var listing = listings.insert({
@@ -136,23 +136,12 @@ app.post('/post-listing', (req, res) => {
                     });
     
 
-    if (
-        listing.title == "" ||
-        listing.description == "" ||
-        req.body.zip_code == 0 ||
-        req.body.location == ""
-    ) {
-        good = false;
-        res.sendStatus(422);
-    }
-
-    console.log(error);
-
-    if (good) {
+    
+        console.log(listing);
         listings.update(listing);
         fileId ++;
-        res.redirect('/listings');
-    }
+        res.sendStatus(200);
+    
 
 
     //var debugListing = console.debug(listings.findOne());
