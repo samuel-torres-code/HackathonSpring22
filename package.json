@@ -1,18 +1,31 @@
 {
-  "name": "th-jokes",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.1",
-    "ejs": "^3.1.6",
-    "express": "^4.17.2",
-    "lokijs": "^1.5.12",
-    "morgan": "^1.10.0"
-  }
+    "name": "reusable",
+    "version": "1.0.0",
+    "description": "Provide beginners and those with limited website development experience the tools and knowledge to build a full-stack website (both a frontend and backend).",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.1",
+        "ejs": "^3.1.6",
+        "express": "^4.17.2",
+        "lokijs": "^1.5.12",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.4"
+    },
+    "devDependencies": {
+        "bulma": "^0.9.3",
+        "node-sass": "^7.0.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/samuel-torres-code/HackathonSpring22.git"
+    },
+    "bugs": {
+        "url": "https://github.com/samuel-torres-code/HackathonSpring22/issues"
+    },
+    "homepage": "https://github.com/samuel-torres-code/HackathonSpring22#readme"
 }

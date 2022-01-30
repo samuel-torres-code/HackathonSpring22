@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    
+    <style>
+      .button {
+          background-color: #E4DEAE;
+          border: 5px solid #000000;
+          color: white;
+          padding: 0px 60px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 40px;
+          margin: 4px 2px;
+          transition-duration: 0.3s;
+          cursor: pointer;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+      }
+      .button1 {
+          background-color: #E4DEAE; 
+          color: black; 
+          border: 4px solid #000000;
+          border-radius: 32px;
+      }
+      .button1:hover {
+          background-color: #000000;
+          color: white;
+      }
+      .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200px;
+       }
+
+      .wrapper {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+      }
+
+      @media screen and (max-width: 1080px) {
+        .wrapper {
+          display: grid;
+          
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+
+      .square {
+        height: 300px;
+        width: 300px;
+        background-color: #E4DEAE;
+        border: 5px solid #000000;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 25px;
+        
+      }
+
+      h1 {
+        text-align: center;
+        font-size:40px
+      }
+
+      h2 {
+        text-align: center;
+        font-size:25px
+      }
+
+    </style>
+</head>
+
+<body style="background-color:#133A1B;">
+    <div class="center">
+      <a href = "/post">
+          <button class="button button1">post</button>
+      </a>
+    </div>
+
+    <div class="wrapper">
+        <% data.forEach((listing) => { %>
+      <div class = "square">
+        <h1 ><%= listing.title %></h1>
+        <h2><%= listing.description %></h2>
+
+        <%= listing.title %>
+
+      </div>
+      <% }) %>
+    </div>
+      
+      <!-- <div class = "square">
+        <h1 >title2</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+      
+      <div class = "square">
+        <h1 >title3</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+
+      <div class = "square">
+        <h1 >title4</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+
+      <div class = "square">
+        <h1 >title5</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div>
+      
+      <div class = "square">
+        <h1 >title6</h1>
+        <h2>desc</h2>
+
+        location
+
+      </div> -->
+    
+</body>
+</html>
